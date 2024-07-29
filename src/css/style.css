@@ -17,7 +17,6 @@ body{
 }
 
 canvas{
-  width: 400px;
   background-color: #111;
 }
 
@@ -50,5 +49,30 @@ canvas{
     align-items: center;
     gap: 5px;
     color: #333;
+  }
+}
+
+.btn-container{
+  display: none;
+  width: 300px;
+  justify-content: space-between;
+  margin-top: 30px;
+  & .up-down, .left-right{
+    display: flex;
+    gap: 10px;
+  }
+  & button{
+    color: #333;
+    padding: 10px;
+    width: 50px;
+    height: 50px;
+    font-size: 1.5em;
+    font-weight: bold;
+    border-radius: 5px;
+    box-shadow: 0px 5px 0px #5e5e5e;
+  }
+  & button:active{
+    box-shadow: none;
+    transform: translateY(5px);
   }
 }

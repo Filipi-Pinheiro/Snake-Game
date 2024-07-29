@@ -1,6 +1,12 @@
 const canvas = document.querySelector("canvas")
 const ctx = canvas.getContext("2d")
-const audio = new Audio("../assets/audio.mp3")
+const audio = document.querySelector("audio")
+
+const controls = document.querySelector(".btn-container")
+const up = document.querySelector(".up")
+const down = document.querySelector(".down")
+const left = document.querySelector(".left")
+const right = document.querySelector(".right")
 
 const score = document.querySelector(".score-value")
 const finalScore = document.querySelector(".final-score > span")
@@ -14,6 +20,17 @@ let snake = [{x: 300, y: 300}]
 const incrementScore = () => {
   score.innerText = +score.innerText + 10
 }
+
+const screenSize = () => {
+  const screenWidth = window.innerWidth
+
+  if (screenWidth < 768) {
+    controls.style.display = "flex"
+    canvas.style.width = "400px"
+  }
+}
+
+screenSize()
 
 const randomNumber = (min, max) => {
   return Math.round(Math.random() * (max - min) + min)
@@ -110,7 +127,7 @@ const chackEat = () => {
   if (head.x == food.x && head.y == food.y) {
     incrementScore()
     snake.push(head)
-    audio.play
+    audio.play()
 
     let x = randomPosition()
     let y = randomPosition()
@@ -184,6 +201,30 @@ document.addEventListener('keydown', ({ key }) => {
 
   if(key == "arrowUp" && direction != "down") {
     direction = "up"
+  }
+})
+
+up.addEventListener('mousedown', () => {
+  if (direction != "down") {
+    direction = "up"
+  }
+})
+
+down.addEventListener('mousedown', () => {
+  if (direction != "up") {
+    direction = "down"
+  }
+})
+
+left.addEventListener('mousedown', () => {
+  if (direction != "right") {
+    direction = "left"
+  }
+})
+
+right.addEventListener('mousedown', () => {
+  if (direction != "left") {
+    direction = "right"
   }
 })
 
