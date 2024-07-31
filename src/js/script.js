@@ -15,7 +15,9 @@ const buttonPlay = document.querySelector(".btn-play")
 
 const size = 30
 
-let snake = [{x: 300, y: 300}]
+const initialPosition = {x: 300, y: 300}
+
+let snake = [initialPosition]
 
 const incrementScore = () => {
   score.innerText = +score.innerText + 10
@@ -121,6 +123,20 @@ const drawGrid = () => {
   }
 }
 
+const heEat = () => {
+  let x = randomPosition()
+  let y = randomPosition()
+  
+  while (snake.find((position) => position.x == x && position.y == y)) {
+    x = randomPosition()
+    y = randomPosition()
+  }
+
+  food.x = x
+  food.y = y
+  food.color = randomColor()
+}
+
 const chackEat = () => {
   const head = snake[snake.length -1]
 
@@ -128,18 +144,7 @@ const chackEat = () => {
     incrementScore()
     snake.push(head)
     audio.play()
-
-    let x = randomPosition()
-    let y = randomPosition()
-
-    while (snake.find((position) => position.x == x && position.y == y)) {
-      x = randomPosition()
-      y = randomPosition()
-    }
-
-    food.x = x
-    food.y = y
-    food.color = randomColor()
+    heEat()
   }
 }
 
@@ -166,6 +171,7 @@ const gameOver = () => {
   menu.style.display = "flex"
   finalScore.innerText = score.innerText
   canvas.style.filter = "blur(2px)"
+  controls.style.display = "none"
 }
 
 const gameLoop = () => {
@@ -232,6 +238,8 @@ buttonPlay.addEventListener('click', () => {
   score.innerText = "00"
   menu.style.display = "none"
   canvas.style.filter = "none"
+  controls.style.display = "flex"
+  heEat()
 
-  snake = [{x: 300, y: 300}]
+  snake = [initialPosition]
 })
