@@ -126,7 +126,7 @@ const drawGrid = () => {
 const heEat = () => {
   let x = randomPosition()
   let y = randomPosition()
-  
+
   while (snake.find((position) => position.x == x && position.y == y)) {
     x = randomPosition()
     y = randomPosition()
@@ -167,7 +167,7 @@ const chackCollision = () => {
 
 const gameOver = () => {
   direction = undefined
-
+  
   menu.style.display = "flex"
   finalScore.innerText = score.innerText
   canvas.style.filter = "blur(2px)"
